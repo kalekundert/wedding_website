@@ -1,14 +1,18 @@
-/*
-@font-face {
-    font-family: "PT Sans Narrow";
-    src: url("PTN57F.ttf")
-}
-@font-face {
-    font-family: "PT Sans Narrow Bold";
-    src: url("PTN77F.ttf")
-}
-*/
 @import url('https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700|PT+Sans');
+
+@mixin rotate-and-skew($deg) {
+	-webkit-transform: skew($deg) rotate($deg);
+	-moz-transform: skew($deg) rotate($deg);
+	-ms-transform: skew($deg) rotate($deg);
+	-o-transform: skew($deg) rotate($deg);
+	transform: skew($deg) rotate($deg);
+}
+
+@mixin box-shadow($shadows...) {
+    -webkit-box-shadow: $shadows;
+	-moz-box-shadow: $shadows;
+	box-shadow: $shadows;
+}
 
 body {
 	font-family: 'PT Sans', sans-serif;
@@ -17,45 +21,37 @@ body {
 	background-color: #f7fbfd
 }
 
-.box {
+#page {
 	position: relative;
 	width: 690px;
 	padding: 0;
 	margin: -8px auto 0;
 	background-color: #fff;
-	background-image: url("resources/paper/paper_5.jpg"); /* good and subtle */
-    -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
-	-moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
-	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+	background-image: url("background.jpg"); // good and subtle
+    @include box-shadow(0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1));
 }
 
-.box:before, .box:after {
+%page-shadow {
 	position: absolute;
 	width: 40%;
 	height: 10px;
 	content: ' ';
-	left: 12px;
 	bottom: 12px;
 	background: transparent;
-	-webkit-transform: skew(-5deg) rotate(-5deg);
-	-moz-transform: skew(-5deg) rotate(-5deg);
-	-ms-transform: skew(-5deg) rotate(-5deg);
-	-o-transform: skew(-5deg) rotate(-5deg);
-	transform: skew(-5deg) rotate(-5deg);
-	-webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-	-moz-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    @include box-shadow(0 6px 12px rgba(0, 0, 0, 0.3));
 	z-index: -1;
+}
+
+#page:before {
+    @extend %page-shadow;
+    @include rotate-and-skew(-5deg);
+	left: 12px;
 } 
 
-.box:after {
-	left: auto;
+#page:after {
+    @extend %page-shadow;
+    @include rotate-and-skew(5deg);
 	right: 12px;
-	-webkit-transform: skew(5deg) rotate(5deg);
-	-moz-transform: skew(5deg) rotate(5deg);
-	-ms-transform: skew(5deg) rotate(5deg);
-	-o-transform: skew(5deg) rotate(5deg);
-	transform: skew(5deg) rotate(5deg);
 } 
 
 #masthead {

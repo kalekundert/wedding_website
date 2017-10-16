@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>{% block title %}Christina & Kale{% endblock %}</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+
+<body>
+
+<div id="page">
+
+<img id="masthead" src="masthead.png"/>
+
+<div id="content">
+
+  {% block nav %}
+  <ul id="nav">
+    <li><a href="#">Events</a></li>
+    <li><a href="#">Travel</a></li>
+    <li><a href="#">Lodging</a></li>
+    <li><a href="#">Registry</a></li>
+    <li><a href="#">Gallery</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  {% endblock %}
+
+  {% block content %}
+  {% endblock %}
+
+</div>
+</div>
+
+</body>
+
+</html>
