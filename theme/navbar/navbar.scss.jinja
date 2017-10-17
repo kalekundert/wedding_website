@@ -1,0 +1,54 @@
+$spritesheet: 'navbar.png';
+
+#navbar {
+    position: relative;
+    width: {{ banner_width }}px;
+    height: {{ banner_height }}px;
+    margin: 50px auto;
+    padding: 0;
+}
+
+#navbar li, #navbar a {
+    position: absolute;
+    display: block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    outline: none;
+}
+
+#navbar li {
+    top: 0px;
+    height: {{ banner_height }}px;
+}
+
+#banner {
+    left: 0px;
+    width: {{ banner_width }}px;
+    background: url($spritesheet) 0px -{{ y_offset['banner'] }}px;
+}
+
+{% for id, li_left, li_width, a_left, a_width in columns: %}
+#{{ id }} {
+    left: {{ li_left }}px;
+    width: {{ li_width }}px;
+}
+#{{ id }} a {
+    top: {{ a_top }}px;
+    left: {{ a_left }}px;
+    width: {{ a_width }}px;
+    height: {{ a_height }}px;
+}
+#{{ id }} a:hover {
+    background: url($spritesheet) -{{ li_left + a_left }}px -{{ y_offset['hover'] + a_top }}px;
+}
+#{{ id }} a:active {
+    background: none;
+}
+#{{ id }}.current {
+    cursor: default;
+    pointer-events: none;
+    background: url($spritesheet) -{{ li_left }}px -{{ y_offset['current'] }}px;
+}
+{% endfor %}
+

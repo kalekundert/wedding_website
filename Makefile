@@ -1,12 +1,21 @@
+# If any subdir has a makefile, run that makefile and don't do anything else to 
+# those files.
+
+## Configure how to connect to the server.
+WEB_SERVER		:= kalekundert_borecole@ssh.phx.nearlyfreespeech.net
+WEB_DIR			:= wedding
+
 ## Define the structure of the site.
-CONTENT   := content
-THEME     := theme
-BUILD	  := build
+CONTENT			:= content
+THEME			:= theme
+NAVBAR			:= theme/navbar
+BUILD			:= build
 
 ## Define the commands that will be used to generate the site.
-JINJA     	:= jinja2 --template-dir $(THEME) --trim-whitespace
-SASS		:= sass
-COPY		:= cp
+JINJA			:= jinja2 --template-dir $(THEME) --trim-whitespace
+SASS			:= sass
+COPY			:= cp
+RSYNC			:= rsync -av --delete
 
 ## Work out the paths for all the files we need to generate.
 INCLUDE_RULES := \
@@ -24,27 +33,48 @@ CONTENT_IN := $(filter-out \
 CONTENT_OUT := $(patsubst \
 	$(CONTENT)/%, $(BUILD)/%, $(CONTENT_IN))
 
-THEME_HTML := $(wildcard $(THEME)/*.html)
+NAVBAR_IN := $(wildcard $(NAVBAR)/*)
+NAVBAR_PNG_IN := \
+	$(NAVBAR)/make_spritesheet.sh \
+	$(NAVBAR)/nav_link.png \
+	$(NAVBAR)/nav_hover.png \
+	$(NAVBAR)/nav_current.png
+NAVBAR_PNG_OUT := \
+	$(BUILD)/navbar.png
+NAVBAR_CSS_IN := \
+	$(NAVBAR)/make_css.py \
+	$(NAVBAR)/nav_divisions.png \
+	$(NAVBAR)/navbar.scss.jinja
+NAVBAR_CSS_OUT := \
+	$(BUILD)/navbar.css
+
+THEME_HTML := $(wildcard $(THEME)/*.html) $(THEME)/make_page.py
 THEME_SCSS_IN := $(wildcard $(THEME)/*.scss)
 THEME_CSS_OUT := $(patsubst \
 	$(THEME)/%.scss, $(BUILD)/%.css, $(THEME_SCSS_IN))
 
 THEME_IN := $(filter-out \
-	$(THEME_HTML) $(THEME_SCSS_IN), \
+	$(THEME_HTML) $(THEME_SCSS_IN) $(NAVBAR_IN), \
 	$(shell find $(THEME) $(INCLUDE_RULES)))
 THEME_OUT := $(patsubst \
 	$(THEME)/%, $(BUILD)/%, $(THEME_IN))
 
 ALL_OUTPUTS := \
 	$(CONTENT_OUT) $(CONTENT_HTML_OUT) \
-	$(THEME_OUT) $(THEME_CSS_OUT) 
+	$(THEME_OUT) $(THEME_CSS_OUT) \
+	$(NAVBAR_PNG_OUT) $(NAVBAR_CSS_OUT)
 
 ## Specify how to build the site.
 html: $(ALL_OUTPUTS)
 
 $(BUILD)/%.html : $(CONTENT)/%.html $(THEME_HTML)
-	$(JINJA) $< > $@.tmp
-	@mv $@.tmp $@
+	$(THEME)/make_page.py $< > $@
+
+$(NAVBAR_PNG_OUT) : $(NAVBAR_PNG_IN)
+	$(NAVBAR)/make_spritesheet.sh $@
+
+$(NAVBAR_CSS_OUT) : $(NAVBAR_CSS_IN)
+	$(NAVBAR)/make_css.py > $@
 
 $(BUILD)/%.css : $(THEME)/%.scss
 	$(SASS) $^ $@
@@ -57,17 +87,11 @@ $(BUILD)/% : $(THEME)/%
 	@mkdir -p $(shell dirname $@)
 	$(COPY) $^ $@
 
-upload: site
-	rsync
+upload: html
+	$(RSYNC) $(BUILD)/ $(WEB_SERVER):$(WEB_DIR)
 
 clean:
 	rm -rf $(BUILD)/*
-
-test:
-	@echo 'CONTENT_OUT:       ' $(CONTENT_OUT)
-	@echo 'CONTENT_HTML_OUT:  ' $(CONTENT_HTML_OUT)
-	@echo 'THEME_OUT:         ' $(THEME_OUT)
-	@echo 'THEME_CSS_OUT:     ' $(THEME_CSS_OUT)
 
 .PHONY = html clean upload
 

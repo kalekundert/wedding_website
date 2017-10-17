@@ -60,51 +60,8 @@ body {
 }
 
 #content {
-    padding: 50px;
-}
-
-#nav {
-    text-align: justify;
-    font-size: 0;
-    margin: 0;
-    margin-bottom: 15px;
-    padding: 0;
-
-}
-#nav:after {
-    content: '';
-    display: inline-block;
-    width: 100%;
-}
-#nav li {
-    display: inline-block;
-    font-family: "PT Sans Narrow", sans-serif;
-    font-size: 16pt;
-    color: black;
-}
-
-#nav a {
-    text-decoration: none;
-    color: black;
-}
-
-#nav a:hover {
-    text-shadow: 2px 2px 2px #b4b9bf;
-}
-
-.picture {
-    box-shadow: 2px 2px 2px #b4b9bf;
-    width: 260px;
-    float: right;
-    /*border: 1px solid #b4b9bf;*/
-}
-
-.vr {
-  display:inline;
-  height:100%;
-  width:1px;
-  border:1px inset;
-  margin:5px
+    margin: 50px;
+    padding-bottom: 50px;
 }
 
 h2 {
@@ -121,5 +78,12 @@ p {
 
 p:last-of-type {
     margin-bottom: 0;
+}
+
+figure img {
+    box-shadow: 2px 2px 2px #b4b9bf;
+    width: 260px;
+    float: right;
+    /*border: 1px solid #b4b9bf;*/
 }
 
