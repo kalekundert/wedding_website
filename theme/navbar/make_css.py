@@ -83,7 +83,7 @@ def render_css(scss):
 
 if __name__ == '__main__':
 
-    path = SCRIPT_DIR / 'nav_divisions.png'
+    path = SCRIPT_DIR / 'sprite_divisions.png'
     dims = find_dimensions(path)
     scss = render_scss('navbar.scss.jinja', dims)
     css = render_css(scss)

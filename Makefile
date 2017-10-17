@@ -36,14 +36,14 @@ CONTENT_OUT := $(patsubst \
 NAVBAR_IN := $(wildcard $(NAVBAR)/*)
 NAVBAR_PNG_IN := \
 	$(NAVBAR)/make_spritesheet.sh \
-	$(NAVBAR)/nav_link.png \
-	$(NAVBAR)/nav_hover.png \
-	$(NAVBAR)/nav_current.png
+	$(NAVBAR)/sprite_link.png \
+	$(NAVBAR)/sprite_hover.png \
+	$(NAVBAR)/sprite_current.png
 NAVBAR_PNG_OUT := \
 	$(BUILD)/navbar.png
 NAVBAR_CSS_IN := \
 	$(NAVBAR)/make_css.py \
-	$(NAVBAR)/nav_divisions.png \
+	$(NAVBAR)/sprite_divisions.png \
 	$(NAVBAR)/navbar.scss.jinja
 NAVBAR_CSS_OUT := \
 	$(BUILD)/navbar.css
