@@ -6,19 +6,20 @@
   <title>{% block title %}Christina & Kale{% endblock %}</title>
   <link rel="stylesheet" href="style.css"/>
   <link rel="stylesheet" href="navbar.css"/>
+  <style>{% block css %}{% endblock %}</style>
 </head>
 
 <body>
 
 <div id="page">
 
-<img id="masthead" src="masthead.png"/>
+<img id="masthead" alt="Christina & Kale" src="masthead.png"/>
 
 {% block nav %}
 <ul id="navbar">
   <li id="banner"/>
   {% for id in ids %}
-    <li id="{{ id }}"{% if id == this_page.stem %} class="current"{% endif %}><a href="{{ id }}.html"></a></li>
+    <li id="{{ id }}"{% if id == this_page.stem %} class="current"{% endif %}><a title="{{ id | title }}" href="{{ id }}.html"></a></li>
   {% endfor %}
 </ul>
 {% endblock %}
