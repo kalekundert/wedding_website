@@ -14,18 +14,13 @@
 	box-shadow: $shadows;
 }
 
-body {
-	font-family: 'PT Sans', sans-serif;
-	font-size: 100%;
-	color: #333;
-	background-color: #f7fbfd
-}
+// Page layout
 
 #page {
 	position: relative;
 	width: 690px;
 	padding: 0;
-	margin: -8px auto 0;
+	margin: -8px auto 50px;
 	background-color: #fff;
 	background-image: url("background.jpg"); // good and subtle
     @include box-shadow(0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1));
@@ -60,8 +55,18 @@ body {
 }
 
 #content {
-    margin: 50px;
+    padding-left: 80px;
+    padding-right: 80px;
     padding-bottom: 50px;
+}
+
+// Content style
+
+body {
+	font-family: 'PT Sans', sans-serif;
+	font-size: 100%;
+	color: #333;
+	background-color: #f7fbfd
 }
 
 h2 {
@@ -80,10 +85,27 @@ p:last-of-type {
     margin-bottom: 0;
 }
 
-figure img {
-    box-shadow: 2px 2px 2px #b4b9bf;
-    width: 260px;
-    float: right;
-    /*border: 1px solid #b4b9bf;*/
+figure {
+    margin: 0;
+    margin-bottom: 10px;
+    vertical-align: top;
+    display: inline-block;
+
+    img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 5px;
+        vertical-align: top;
+        @include box-shadow(2px 2px 2px #b4b9bf);
+    }
+
+    figcaption {
+        font-style: italic;
+        text-align: center;
+    }
+}
+
+.map {
+    @include box-shadow(2px 2px 2px #b4b9bf);
 }
 

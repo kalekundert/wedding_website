@@ -20,7 +20,37 @@ LINK_IDS = [
         'gallery',
         'contact',
 ]
+PAGE_WIDTH = 690 - 2 * 80
 
+
+def picture_row(*paths):
+    from PIL import Image
+    from types import SimpleNamespace
+    
+    images = []
+
+    for name in paths:
+        path = CONTENT_DIR / 'pictures' / name
+        pixels = Image.open(str(path))
+
+        image = SimpleNamespace()
+        image.src = f'pictures/{name}'
+        image.full_width, image.full_height = pixels.size
+        image.aspect_ratio = image.full_width / image.full_height
+
+        images.append(image)
+        
+    margin = 10
+    net_margin = margin * (len(images) - 1)
+    height = (PAGE_WIDTH - net_margin) / sum(x.aspect_ratio for x in images)
+
+    for i, image in enumerate(images):
+        image.height = height
+        image.width = image.aspect_ratio * height
+        image.margin = margin if i else 0
+        image.html = f'<img src="{image.src}" style="width: auto; height: {image.height}px; margin-left: {image.margin};"/>'
+
+    return images
 
 def render_page(path):
     import jinja2
@@ -39,6 +69,9 @@ def render_page(path):
     return env.get_template(path.name).render(
             ids=LINK_IDS,
             this_page=path,
+            page_width=PAGE_WIDTH,
+            picture_row=picture_row,
+            zip=zip,
     )
 
 

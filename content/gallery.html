@@ -1,9 +1,222 @@
 {% extends "template.html" %}
 
-{% block content %}
+{% macro figure(paths, caption) %}
+{% set images = picture_row(*paths) %}
 <figure>
-  <img src="pictures/i_like_you.jpg"/>
-  I like you too!
+  {% for img in images %}
+  <img src="{{ img.src }}" style="width: {{ img.width }}px; margin-left: {{ img.margin }};"/>
+  {% endfor %}
+  <figcaption>{{ caption }}</figcaption>
 </figure>
+{% endmacro %}
+
+{% macro figure_pair(path_0, caption_0, path_1, caption_1) %}
+{% set images = picture_row(path_0, path_1) %}
+{% set captions = caption_0, caption_1 %}
+{% for img, caption in zip(images, captions) %}
+<figure style="width: {{ img.width }}px; margin-left: {{ img.margin }}">
+  <img src="{{ img.src }}"/>
+  <figcaption>{{ caption }}</figcaption>
+</figure>
+{% endfor %}
+{% endmacro %}
+
+{% block content %}
+
+<h1>2012</h1>
+
+{{ figure(
+  ["201206_stompy_jones.jpg", "201206_kale_fedora.jpg"],
+    """Where it all started: Tuesday Night Jump in San Francisco!  Lindy 
+    hopping to live music by Stompy Jones every week!  We always dance 
+    <a href=\"music/new_direction.mp3\">our favorite song</a> together.""") }}
+
+<h1>2013</h1>
+
+{{ figure_pair(
+  "201302_cocoa_cayenne.jpg", 
+  """Who loves <a 
+    href=\"http://www.cookingchanneltv.com/recipes/spicy-mexican-hot-chocolate-cookies-1962907\">cocoa-cayenne 
+    cookies</a>?  We do!""",
+  "201306_civic_center_pride.jpg",
+    """Outside of City Hall the day the Supreme Court<br/>struck down the 
+    Defense of Marriage Act.""") }}
+
+{{ figure_pair(
+  "201308_giants_game.jpg",
+    """Christina wears orange to a Giants&apos; game &mdash; for once.  But 
+    they were playing the Orioles, so maybe we shouldn’t give her too much 
+    credit...""",
+  "201310_tea_garden_cropped.jpg",
+    """Enjoying an afternoon in the Japanese Tea Garden in Golden Gate 
+    Park.""") }}
+
+{{ figure(
+  ["201312_mendocino_1.jpg", "201312_mendocino_2.jpg"],
+    """Christmas in Mendocino, CA.  Santa brought North Coast Brewing 
+    flights!""") }}
+
+<h1>2014</h1>
+
+{{ figure(
+  ["201405_monica_swing_timelapse.jpg"],
+    """Celebrating Monica And Jack’s wedding in St. Louis, MO and busting out 
+    some sweet swing dancing moves...while staring at out feet.""") }}
+
+{{ figure(
+  ["201405_st_louis_arch.jpg", "201405_fitzy_climbs.jpg", "201405_kale_spins.jpg"],
+    """While we were in St. Louis, we also summited the Arch and explored the 
+    City Museum, which is basically an old factory that’s been filled with 
+    things you can climb on.""") }}
+
+{{ figure(
+  ["201407_giants_16_innings.jpg"],
+    """Friday evening SF Giants Baseball.  This particular game lasted 16 
+    innings.  (Did you know that there’s also a 14<sup>th</sup> inning 
+    stretch?)  Towards the end, we snuck down closer to the field <s>to heckle 
+    the other team’s bullpen</s> watch until the 
+    bitter end.""") }}
+
+{{ figure_pair(
+  "201409_lindy_in_the_park.jpg",
+    """Our friends Nadia, Danny, and Robert came to visit, so we decided to 
+    take them to Sunday afternoon Lindy in the Park!  We might’ve had more fun 
+    than they did...""",
+  "201409_gg_bridge_hike_1.jpg",
+    """Fun fact: This is the photo that shows up on Christina’s phone when Kale 
+    calls her!""") }}
+
+{{ figure_pair(
+  "201409_niners_home_opener.jpg",
+    """We went to the very first game the 49ers played in their new stadium.  
+    They’ve been completely awful ever since.""",
+  "201410_fleet_week.jpg",
+    """We watched the Blue Angels from a rooftop in the Marina at our friend 
+    Monica’s annual Fleet Week barbecue.""") }}
+
+{{ figure(
+  ["201410_world_series_cheap_seats_1.jpg", "201410_world_series_cheap_seats_2.jpg", "201410_world_series_cheap_seats_3.jpg"],
+    """2014 World Series: Giants vs Royals.  We listened to the game<br/>on a 
+    crappy radio from the real cheap seats.""") }}
+
+<h1>2015</h1>
+
+{{ figure(
+  ["201503_tide_pools_fitzy.jpg", "201503_tide_pools.jpg"],
+    """Christina and Kale take a break from listening to science talks at the 
+    grad school retreat to check out the awesome tide pools &mdash; what slackers.""") }}
+
+{{ figure_pair(
+  "201505_off_the_grid.jpg",
+    """Gotta grab those Señor Sisig burritos!""",
+  "201504_mature_jokers.jpg",
+    """These two jokers are definitely<br/>mature enough to be getting married.""") }}
+
+{{ figure(
+  ["201506_kale_window_seat.jpg", "201506_spain_harbor_cropped.jpg"],
+  """Our friends Dan and Marta got married in Spain.<br/>Getting there was a 
+  slog, but being there was amazing!""") }}
+
+{{ figure(
+  ["201506_spain_portrait.jpg", "201506_spain_photobomb.jpg"],
+  """We tried to take a few serious, respectable portraits,<br/>but the groom 
+  managed to liven one of them up.""") }}
+
+{{ figure(
+  ["201507_fitzy_imitates_art.jpg", "201507_kale_imitates_art.jpg"],
+  """Life imitates art in Bilbao, Spain (left) and Dublin, Ireland (right).""") }}
+
+{{ figure_pair(
+  "201507_cliffs_of_moher.jpg",
+    """The Cliffs of Moher, Ireland.  Like the idiot tourists we are, we 
+    wandered off the path and almost fell off the edge.""",
+  "201507_guinness_brewery.jpg",
+    """It's true what they say &mdash; Guinness<br/>really does taste better in 
+    Ireland.""") }}
+
+{{ figure_pair(
+  "201509_bridesmaids.jpg",
+  """Jordan, Nadia, Michelle, and Christina make<br/>the picture face to celebrate 
+    Nadia’s wedding.""",
+  "201509_fitzy_dancing.jpg",
+    """Kale nearly flings Christina into the onlookers.""") }}
+
+{{ figure(
+  ["201509_butterfly_torture_chamber_fitzy.jpg", "201509_butterfly_torture_chamber_kale.jpg"],
+  """We visited the Minnesota State Fair after Nadia and Danny’s wedding.  One 
+  of our favorite attractions was the <s>Butterfly Torture Chamber</s> 
+  Butterfly House.""") }}
+
+<h1>2016</h1>
+
+{{ figure(
+  ["201601_wise_sons_fitzy.jpg", "201601_wise_sons_kale.jpg"],
+  """Our New Year's Resolution was to try all of the restaurants we'd been 
+  meaning to go to, but hadn't made time for.  First on the list was Wise and 
+  Sons in the Mission.""") }}
+
+{{ figure_pair(
+  "201603_science_mentor.jpg", 
+    """Christina shows budding scientist Amarech around the chemistry lab.""",
+  "201607_carbo_loading.jpg",
+    """Weekends in the lab mean lunches<br/>at the local food truck park.""") }}
+
+{{ figure(
+  ["201607_during_marathon.jpg", "201607_after_marathon.jpg"],
+    """Christina still looks fresh at mile 20 of the San Francisco Marathon 
+    (left). Not so much at the finish line, a mere 6.2 miles later (right). A
+    cheering Kale met her with a sparkly sign, fresh shoes, and plenty of 
+    sugary donuts.""") }}
+
+{{ figure(
+  ["201608_hiking_fitzy.jpg",
+   "201608_chewing_gum_lake_2.jpg"],
+   """Christina and Kale enjoy hiking in the Emigrant Wilderness &mdash; 
+   especially<br/>swimming in chewing gum lake after a hot afternoon on the 
+  trail.""") }}
+
+{{ figure_pair(
+  "201611_election_day.jpg",
+    """Election day fell on Christina's birthday this year.  Also, her PhD 
+    thesis was due that week.  We look happy in the picture, but it was a sucky 
+    week.""",
+  "201606_power_grid.jpg",
+    """Kale contemplates the best way to provide electricity to the Eastern 
+    Seaboard.""") }}
+
+<h1>2017</h1>
+
+{{ figure_pair(
+  "201702_chess.jpg",
+    """Kale spends more time than he should<br/>thinking about his 2<sup>nd</sup> 
+    move.""",
+  "201703_5am_airport.jpg",
+    """Who's excited to be at the airport at 5:00 AM?  We are!  We are!""") }}
+
+{{ figure_pair(
+  "201703_michelle_wedding_dancing.jpg",
+    """Swing dancing at Michelle’s wedding...and looking at our feet.""",
+  "201703_ny_high_line.jpg",
+    """Walking the High Line in NYC with Nadia and Rob.""") }}
+
+{{ figure(
+  ["201704_croissant_fitzy.jpg", "201704_croissant_kale.jpg"],
+  """Christina measures the dough and Kale flexes his croissant-making 
+  muscles.""") }}
+
+{{ figure(
+  ["201705_will_you_marry_me.jpg"],
+  """Kale stacks the deck for the ultimate board-game proposal.<br/>Christina 
+  unromantically responds with \"Missile Envy\".""") }}
+
+{{ figure(
+  ["201708_lair_selfie.jpg", "201708_lair_hair_stylist.jpg"],
+  """Cal-themed family camp.  Kale gets his hair expertly styled by Emily, age 
+  5.""") }}
+
+{{ figure(
+  ["201709_i_like_you.jpg"],
+  """Kale: I like you, but I also like pizza. ☺""") }}
+
 {% endblock %}
 
