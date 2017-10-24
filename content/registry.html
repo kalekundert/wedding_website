@@ -1,9 +1,36 @@
 {% extends "template.html" %}
 
+{% block css %}
+article.poem {
+  text-align: center;
+}
+
+article.poem p {
+  margin: 0 auto;
+  display: inline-block;
+  margin-bottom: 20px;
+  text-align: left;
+}
+{% endblock %}
+
 {% block content %}
-<p>
-Please don't feel obligated to get us anything.  We aren't living together at 
-the moment, and we already have most everything we need anyways.
-</p>
+<article class="poem">
+  <p>
+  We’ve been fortunate to benefit in both love and in life.</br>
+  We also recognize that gift-giving causes people strife.</br>
+  </br>
+  If choosing a gift is not your cup of tea,</br>
+  You might find ideas at our Amazon Registry (linked)</br>
+  </br>
+  In lieu of traditional gifts, and we mean this with sincerity,</br>
+  We’d also be honored if you donated to a charity.</br>
+  </br>
+  We’ve listed a few here that we like to support</br>
+  </br>
+  Your presence at our wedding is the greatest gift of all.</br>
+  We can’t wait to see you! We’re sure it will be a ball!</br>
+  </p>
+</article>
+
 {% endblock %}
 
