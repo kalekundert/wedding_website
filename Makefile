@@ -3,7 +3,7 @@
 
 ## Configure how to connect to the server.
 WEB_SERVER		:= kalekundert_borecole@ssh.phx.nearlyfreespeech.net
-WEB_DIR			:= wedding
+WEB_DIR			:= 
 
 ## Define the structure of the site.
 CONTENT			:= content
@@ -88,7 +88,7 @@ $(BUILD)/% : $(THEME)/%
 	$(COPY) $^ $@
 
 upload: html
-	$(RSYNC) $(BUILD)/ $(WEB_SERVER):$(WEB_DIR)
+	$(RSYNC) $(BUILD)/ $(WEB_SERVER):
 
 clean:
 	rm -rf $(BUILD)/*
