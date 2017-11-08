@@ -1,5 +1,5 @@
 # If any subdir has a makefile, run that makefile and don't do anything else to 
-# those files.
+# those files?
 
 ## Configure how to connect to the server.
 WEB_SERVER		:= kalekundert_borecole@ssh.phx.nearlyfreespeech.net
@@ -32,6 +32,12 @@ CONTENT_IN := $(filter-out \
 	$(shell find $(CONTENT) $(INCLUDE_RULES)))
 CONTENT_OUT := $(patsubst \
 	$(CONTENT)/%, $(BUILD)/%, $(CONTENT_IN))
+
+GALLERY_HTML_OUT := \
+	$(BUILD)/welcome.html \
+	$(BUILD)/gallery.html
+GALLERY_HTML_DEP := \
+	$(CONTENT)/pictures/pictures_with_captions.html
 
 NAVBAR_IN := $(wildcard $(NAVBAR)/*)
 NAVBAR_PNG_IN := \
@@ -69,6 +75,8 @@ html: $(ALL_OUTPUTS)
 
 $(BUILD)/%.html : $(CONTENT)/%.html $(THEME_HTML)
 	$(THEME)/make_page.py $< > $@
+
+$(GALLERY_HTML_OUT) : $(GALLERY_HTML_DEP)
 
 $(NAVBAR_PNG_OUT) : $(NAVBAR_PNG_IN)
 	$(NAVBAR)/make_spritesheet.sh $@
