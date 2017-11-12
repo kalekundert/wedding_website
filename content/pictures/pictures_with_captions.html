@@ -2,7 +2,7 @@
 {% set images = picture_row(*paths) %}
 <figure>
   {% for img in images %}
-  <img src="{{ img.src }}" style="width: {{ img.width }}px; margin-left: {{ img.margin }};"/>
+  <img src="{{ img.src }}" style="width: {{ img.width }}px; margin-left: {{ img.margin }}px;"/>
   {% endfor %}
   <figcaption class="balance-text">{{ caption }}</figcaption>
 </figure>
@@ -12,7 +12,7 @@
 {% set images = picture_row(path_0, path_1) %}
 {% set captions = caption_0, caption_1 %}
 {% for img, caption in zip(images, captions) %}
-<figure style="width: {{ img.width }}px; margin-left: {{ img.margin }}">
+<figure style="width: {{ img.width }}px; margin-left: {{ img.margin }}px">
   <img src="{{ img.src }}"/>
   <figcaption class="balance-text">{{ caption }}</figcaption>
 </figure>

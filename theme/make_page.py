@@ -21,7 +21,8 @@ LINK_IDS = [
         'contact',
 ]
 PAGE_WIDTH = 690 - 2 * 80
-
+MARGIN = 0
+SHADOW = 4
 
 def picture_row(*paths):
     from PIL import Image
@@ -40,15 +41,14 @@ def picture_row(*paths):
 
         images.append(image)
         
-    margin = 10
-    net_margin = margin * (len(images) - 1)
+    net_margin = (MARGIN + SHADOW) * (len(images) - 1)
     height = (PAGE_WIDTH - net_margin) / sum(x.aspect_ratio for x in images)
 
     for i, image in enumerate(images):
         image.height = height
         image.width = image.aspect_ratio * height
-        image.margin = margin if i else 0
-        image.html = f'<img src="{image.src}" style="width: auto; height: {image.height}px; margin-left: {image.margin};"/>'
+        image.margin = MARGIN if i else 0
+        image.html = f'<img src="{image.src}" style="width: auto; height: {image.height}px; margin-left: {image.margin}px;"/>'
 
     return images
 
