@@ -21,8 +21,8 @@ LINK_IDS = [
         'contact',
 ]
 PAGE_WIDTH = 690 - 2 * 80
-MARGIN = 0
-SHADOW = 4
+MARGIN = 1
+SHADOW = 6
 
 def picture_row(*paths):
     from PIL import Image
