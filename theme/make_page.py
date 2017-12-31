@@ -18,7 +18,7 @@ LINK_IDS = [
         'lodging',
         'registry',
         'gallery',
-        'contact',
+        'rsvp',
 ]
 PAGE_WIDTH = 690 - 2 * 80
 MARGIN = 1

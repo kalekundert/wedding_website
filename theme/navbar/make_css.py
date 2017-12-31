@@ -10,7 +10,7 @@ LINK_IDS = [
         'lodging',
         'registry',
         'gallery',
-        'contact',
+        'rsvp',
 ]
 
 
