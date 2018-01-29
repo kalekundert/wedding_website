@@ -62,6 +62,9 @@
     padding-left: 80px;
     padding-right: 80px;
     padding-bottom: 50px;
+    // Needed to get the background to cover the floating divs on the events 
+    // page.
+    overflow: hidden;
 }
 
 // Content style
