@@ -109,6 +109,11 @@ figure {
     }
 }
 
+.feature {
+    width: 250px;
+    float: right;
+}
+
 .map {
     @include box-shadow(2px 2px 2px #b4b9bf);
 }

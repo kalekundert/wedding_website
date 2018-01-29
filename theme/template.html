@@ -19,7 +19,7 @@
 <ul id="navbar">
   <li id="banner"/>
   {% for id in ids %}
-    <li id="{{ id }}"{% if id == this_page.stem %} class="current"{% endif %}><a title="{{ id | title }}" href="{{ id }}.html"></a></li>
+    <li id="{{ id }}"{% if id == this_page.stem %} class="current"{% endif %}><a title="{{ titles.get(id, id | title) }}" href="{{ hrefs.get(id, id + '.html') }}"></a></li>
   {% endfor %}
 </ul>
 {% endblock %}

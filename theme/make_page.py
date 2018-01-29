@@ -20,6 +20,12 @@ LINK_IDS = [
         'gallery',
         'rsvp',
 ]
+LINK_TITLES = {
+        'rsvp': 'RSVP',
+}
+LINK_HREFS = {
+        'rsvp': 'https://goo.gl/forms/0m7z47mgpxR7RPTw2',
+}
 PAGE_WIDTH = 690 - 2 * 80
 MARGIN = 1
 SHADOW = 6
@@ -68,6 +74,8 @@ def render_page(path):
     )
     return env.get_template(path.name).render(
             ids=LINK_IDS,
+            titles=LINK_TITLES,
+            hrefs=LINK_HREFS,
             this_page=path,
             page_width=PAGE_WIDTH,
             picture_row=picture_row,
